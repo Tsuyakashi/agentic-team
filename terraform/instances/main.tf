@@ -13,14 +13,14 @@ data "aws_ami" "ubuntu" {
 #   ami             = data.aws_ami.ubuntu.id
 #   instance_type   = var.instance_type
 #   key_name        = var.key_pair
-#   subnet_id       = var.subnet_id-private
-#   security_groups = [var.security_group-public]
+#   subnet_id       = var.subnet_id_private
+#   security_groups = [var.security_group_public]
 # }
 
 resource "aws_instance" "bastion_host" {
   ami             = data.aws_ami.ubuntu.id
   instance_type   = var.instance_type
   key_name        = var.key_pair
-  subnet_id       = var.subnet_id-public
-  security_groups = [var.security_group-public]
+  subnet_id       = var.subnet_id_public
+  security_groups = [var.security_group_public]
 }

@@ -28,23 +28,23 @@ variable "all_cidr" {
 # EC2
 
 variable "instance_type" {
-  type = string
+  type    = string
   default = "t2.nano"
 }
 
 variable "instances_key_name" {
-  type = string
+  type    = string
   default = "ag-team"
 }
 
 # RDS
 
 variable "db_username" {
-  type = string
+  type    = string
   default = "default"
 }
 
 variable "db_password" {
-  type = string
+  type    = string
   default = "default"
 }

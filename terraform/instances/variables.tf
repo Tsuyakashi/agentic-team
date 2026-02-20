@@ -1,18 +1,19 @@
-
-variable "subnet_id-public" {
+variable "subnet_id_public" {
+  type = string
 }
 
-variable "subnet_id-private" {
+variable "subnet_id_private" {
+  type = string
 }
 
-variable "security_group-public" {
-}
-
-variable "instance_ami" {
+variable "security_group_public" {
+  type = string
 }
 
 variable "instance_type" {
+  type = string
 }
 
 variable "key_pair" {
+  type = string
 }

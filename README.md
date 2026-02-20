@@ -14,18 +14,18 @@ The infrastructure consists of a custom VPC spanning multiple availability zones
     *   **RDS Subnets**: Dedicated subnets for the database layer.
 *   **Gateways**: Internet Gateway for public traffic and NAT Gateway for private outbound traffic.
 *   **Security Groups**:
-    *   `terraform-security-group`: Allows SSH (port 22) from anywhere.
-    *   `rds-terraform-security-group`: Allows PostgreSQL traffic (port 5432) from anywhere.
+    *   `terraform-security-group`: Allows SSH (port 22) from anywhere (should be restricted in production).
+    *   `rds-terraform-security-group`: Allows PostgreSQL traffic (port 5432) only from within the VPC.
 
 ### 💻 Compute
 *   **Bastion Host**: Deploys an EC2 instance running **Ubuntu 24.04 LTS**.
-*   **Scaling**: The root configuration currently initializes two instances of the compute module (`instances` and `instances1`).
+*   **Scaling**: The root configuration currently initializes a single instance of the compute module (`instances`).
 
 ### 🗄️ Database
 *   **Engine**: PostgreSQL 17.6.
 *   **Instance Class**: `db.t3.micro`.
 *   **Storage**: 20GB GP2.
-*   **Connectivity**: Currently configured as **publicly accessible** for ease of development.
+*   **Connectivity**: Configured as **private** (not publicly accessible) and reachable only from within the VPC.
 
 ## 📁 Project Structure
 

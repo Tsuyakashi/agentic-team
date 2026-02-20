@@ -68,14 +68,14 @@ resource "aws_security_group" "default-security-group" {
 }
 
 resource "aws_security_group" "rds-security-group" {
-  name = "rds-terraform-security-group"
-
+  name   = "rds-terraform-security-group"
+  vpc_id = aws_vpc.prod-vpc.id
 
   ingress {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = [var.all_cidr]
+    cidr_blocks = [var.vpc_cidr_block]
   }
 
   egress {
@@ -83,7 +83,6 @@ resource "aws_security_group" "rds-security-group" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = [var.all_cidr]
-
   }
 }
 
@@ -114,6 +113,7 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_nat_gateway" "nat-gw" {
   allocation_id = aws_eip.nat.id
   subnet_id     = aws_subnet.prod-subnet-public-1.id
+  depends_on    = [aws_internet_gateway.igw]
 }
 
 resource "aws_route" "rt-pub" {

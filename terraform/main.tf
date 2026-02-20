@@ -6,9 +6,9 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "ag-team-tfstate"
-    key            = "backend/terraform.tfstate" 
-    region         = "eu-central-1"
+    bucket = "ag-team-tfstate"
+    key    = "backend/terraform.tfstate"
+    region = "eu-central-1"
     # dynamodb_table = "terraform-lock" # optional for locks
     # encrypt        = true
   }
@@ -30,20 +30,9 @@ module "vpc" {
 
 module "instances" {
   source                = "./instances"
-  subnet_id-public      = module.vpc.subnet-public
-  subnet_id-private     = module.vpc.subnet-private
-  security_group-public = module.vpc.instance_security_group_id
-  instance_ami          = module.instances.aws_ami_id
-  key_pair              = var.instances_key_name
-  instance_type         = var.instance_type
-}
-
-module "instances1" {
-  source                = "./instances"
-  subnet_id-public      = module.vpc.subnet-public
-  subnet_id-private     = module.vpc.subnet-private
-  security_group-public = module.vpc.instance_security_group_id
-  instance_ami          = module.instances1.aws_ami_id
+  subnet_id_public      = module.vpc.subnet-public
+  subnet_id_private     = module.vpc.subnet-private
+  security_group_public = module.vpc.instance_security_group_id
   key_pair              = var.instances_key_name
   instance_type         = var.instance_type
 }
@@ -51,8 +40,8 @@ module "instances1" {
 module "rds" {
   source               = "./rds"
   security_group       = module.vpc.rds-sec-group-id
-  subnet-group-public  = module.vpc.subnet-public
-  subnet-group-private = module.vpc.rd-subnet-2
+  subnet_group_public  = module.vpc.rd-subnet-public
+  subnet_group_private = module.vpc.rd-subnet-private
   av_zone1             = var.av_zone_1
   username             = var.db_username
   password             = var.db_password
