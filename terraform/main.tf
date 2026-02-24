@@ -37,12 +37,12 @@ module "instances" {
   instance_type         = var.instance_type
 }
 
-module "rds" {
-  source               = "./rds"
-  security_group       = module.vpc.rds-sec-group-id
-  subnet_group_public  = module.vpc.rd-subnet-public
-  subnet_group_private = module.vpc.rd-subnet-private
-  av_zone1             = var.av_zone_1
-  username             = var.db_username
-  password             = var.db_password
-}
+# module "rds" {
+#   source               = "./rds"
+#   security_group       = module.vpc.rds-sec-group-id
+#   subnet_group_public  = module.vpc.rd-subnet-public
+#   subnet_group_private = module.vpc.rd-subnet-private
+#   av_zone1             = var.av_zone_1
+#   username             = var.db_username
+#   password             = var.db_password
+# }

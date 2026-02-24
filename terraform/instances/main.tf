@@ -18,9 +18,10 @@ data "aws_ami" "ubuntu" {
 # }
 
 resource "aws_instance" "bastion_host" {
-  ami             = data.aws_ami.ubuntu.id
-  instance_type   = var.instance_type
-  key_name        = var.key_pair
-  subnet_id       = var.subnet_id_public
-  security_groups = [var.security_group_public]
+  ami                  = data.aws_ami.ubuntu.id
+  instance_type        = var.instance_type
+  key_name             = var.key_pair
+  subnet_id            = var.subnet_id_public
+  security_groups      = [var.security_group_public]
+  iam_instance_profile = aws_iam_instance_profile.ssm_profile.name
 }

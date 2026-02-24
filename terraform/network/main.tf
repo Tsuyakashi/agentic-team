@@ -18,7 +18,7 @@ resource "aws_subnet" "prod-subnet-public-1" {
 
 resource "aws_subnet" "prod-subnet-private-1" {
   vpc_id     = aws_vpc.prod-vpc.id
-  cidr_block = "10.0.1.0/24"
+  cidr_block = "10.0.2.0/24"
 
   availability_zone = var.av_zone2
   tags = {
@@ -52,12 +52,12 @@ resource "aws_security_group" "default-security-group" {
   name   = "terraform-security-group"
   vpc_id = aws_vpc.prod-vpc.id
 
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = [var.all_cidr]
-  }
+  # ingress {
+  #   from_port   = 22
+  #   to_port     = 22
+  #   protocol    = "tcp"
+  #   cidr_blocks = [var.all_cidr]
+  # }
 
   egress {
     from_port   = 0
